@@ -1,0 +1,47 @@
+<div class="step-container">
+    <div class="exp-container">
+        <span class="steps">{{stepIdx+1}}.</span>
+        <div id="oprand1_{{stepIdx+1}}" class="oprand" #operand1Container
+            (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>
+
+        <div id="operator_group" class="btn-group">
+            <input type="radio" class="btn-check" name="operator_{{stepIdx+1}}" id="plus_{{stepIdx+1}}" autocomplete="off"
+                [(ngModel)]="selectedOperator" [disabled]="disabledOperator" value="+" (click)="onClickOperator($event, stepIdx+1)">
+            <label class="btn btn-outline-success rounded-0" for="plus_{{stepIdx+1}}">&plus;</label>
+            <input type="radio" class="btn-check" name="operator_{{stepIdx+1}}" id="minus_{{stepIdx+1}}" autocomplete="off"
+                [(ngModel)]="selectedOperator" [disabled]="disabledOperator" value="-" (click)="onClickOperator($event, stepIdx+1)">
+            <label class="btn btn-outline-success rounded-0" for="minus_{{stepIdx+1}}">&minus;</label>
+            <input type="radio" class="btn-check" name="operator_{{stepIdx+1}}" id="multiply_{{stepIdx+1}}" autocomplete="off"
+                [(ngModel)]="selectedOperator" [disabled]="disabledOperator" value="*" (click)="onClickOperator($event, stepIdx+1)">
+            <label class="btn btn-outline-success rounded-0" for="multiply_{{stepIdx+1}}">&times;</label>
+            <input type="radio" class="btn-check" name="operator_{{stepIdx+1}}" id="divide_{{stepIdx+1}}" autocomplete="off"
+                [(ngModel)]="selectedOperator" [disabled]="disabledOperator" value="/" (click)="onClickOperator($event, stepIdx+1)">
+            <label class="btn btn-outline-success rounded-0" for="divide_{{stepIdx+1}}">&divide;</label>
+        </div>
+
+        <div id="oprand2_{{stepIdx+1}}" class="oprand" #operand2Container
+            (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>
+
+        <label class="equal-sign btn border-0" draggable="false">&equals;</label>
+
+        <div class="oprand flip-result-card">
+            <div class="flip-card-inner" [ngClass]="{flip : expressions[stepIdx].resultDragged}">
+                <div class="card-base flip-card-front">
+                    <span id="result_{{stepIdx+1}}" class="results badge text-center p-0 fs-3 rounded-0" 
+                        [ngClass]="expressions[stepIdx].isFailed ? 'bg-danger-subtle' : 'bg-success-subtle'"
+                        [draggable]="!expressions[stepIdx].isFailed" (dragstart)="onDragStart($event)">
+                        {{expressions[stepIdx].result}}
+                    </span>
+                </div>
+                <div class="card-base flip-card-back flip">
+                    <img draggable="false" src="assets/images/back.png">
+                </div>
+            </div>
+        </div>
+        @if (!expressions[stepIdx].isFailed) {
+            <span class="steps">
+                {{expressions[stepIdx].operand1 + expressions[stepIdx].operator + expressions[stepIdx].operand2 + "=" + expressions[stepIdx].result}}
+            </span>
+        }
+    </div>
+</div>

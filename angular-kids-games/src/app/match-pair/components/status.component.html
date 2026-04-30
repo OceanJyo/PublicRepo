@@ -1,0 +1,19 @@
+<div id="board-sizes">
+    <p>Board Sizes:</p>
+    <div class="btn-group">
+        @for (bs of boardSizes; track bs; let i = $index) {
+            <button id="btnSize_{{i}}" class="btn btn-outline-primary" [ngClass]="{active: i==selectedBoardSizeIdx}"
+                (click)="onClickSize(i)">{{bs.x}}*{{bs.y}} 
+            </button>
+        }
+    </div>
+    <div id="game-status">
+        @if (gameStatus.foundPairs == totalPairs) {
+            <p class="alert alert-success alert-link">All Completed in {{gameStatus.numOfTrial}} Trials.</p>
+        }
+        @else {
+            <p class="alert alert-warning alert-link ">{{gameStatus.foundPairs}} Pairs Found in {{gameStatus.numOfTrial}} Trials.</p>
+        }
+    </div>
+</div>
+

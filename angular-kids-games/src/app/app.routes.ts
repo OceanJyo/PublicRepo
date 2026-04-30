@@ -1,6 +1,6 @@
 import { Routes } from '@angular/router';
-import { MatchPairComponent } from '../match-pair/components/match-pair.component';
-import { Points24Component } from '../points-24/components/points-24.component';
+import { MatchPairComponent } from './match-pair/components/match-pair.component';
+import { Points24Component } from './points-24/components/points-24.component';
 
 export const routes: Routes = [
     {

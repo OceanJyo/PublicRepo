@@ -1,0 +1,66 @@
+#points24-card-board {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    height: 314px;
+}
+
+#points24-btns {
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: inline-grid;
+    grid-template-columns: auto auto auto auto auto;
+    gap: 20px;
+}
+
+#points24-btns button {
+    font-size: 20px;
+}
+#points24-btns p {
+    font-weight: 700;
+    border-radius: 0.375rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    align-content: center;
+}
+
+.status {
+    width: 150px;
+    text-align: center;
+}
+.status-warning-border {
+    border: 1px solid #ffe69c;
+}
+.status-success-border {
+    border: 1px solid #a3cfbb;
+}
+.status-danger-border {
+    border: 1px solid #f1aeb5;
+}
+
+.spin-btn {
+    display: inline-flex;
+    margin-left: 30px;
+}
+.btn-caption {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.toggle-btn {
+    width: 162px;
+    margin-left: 30px;
+}
+.solutions {
+    border: 1px solid #a3cfbb;
+    width: 430px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.solutions > span {
+    margin-right: 20px;
+}
+
+
+
