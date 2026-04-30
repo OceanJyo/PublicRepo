@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { ScratchComponent } from './scratch.component';
 import { Points24Service } from '../services/points-24.service';
@@ -13,9 +13,9 @@ describe('ScratchComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ScratchComponent],
-      providers: [Points24Service, HttpClient]
-    })
+    imports: [ScratchComponent],
+    providers: [Points24Service, HttpClient, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
     
     service = TestBed.inject(Points24Service);

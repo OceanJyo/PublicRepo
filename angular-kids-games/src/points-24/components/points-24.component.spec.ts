@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { HttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 import { Points24Component } from './points-24.component';
 
@@ -10,10 +10,9 @@ describe('Points24Component', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, Points24Component],
-      providers: [HttpClient]
-
-    })
+    imports: [Points24Component],
+    providers: [HttpClient, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
     
     fixture = TestBed.createComponent(Points24Component);

@@ -1,9 +1,10 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 import { BoardComponent } from './board.component';
 import { MatchPairCardService } from '../services/match-pair-card.service';
 import { MatchPairBoardSize } from '../../app/models/kidsgames.model';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 
 describe('BoardComponent', () => {
   let component: BoardComponent;
@@ -12,9 +13,9 @@ describe('BoardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, BoardComponent],
-      providers: [MatchPairCardService]
-    })
+    imports: [BoardComponent],
+    providers: [MatchPairCardService, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
+})
     .compileComponents();
   
     service = TestBed.inject(MatchPairCardService);
