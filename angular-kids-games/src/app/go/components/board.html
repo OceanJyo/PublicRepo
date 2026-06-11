@@ -1,0 +1,80 @@
+<div class="body">
+    <div class="main-content">
+        <div class="game-container">
+            <header>
+                <h1>Go (Wei Qi)</h1>
+                <div class="mode-selector">
+                    <button id="humanVsAIBtn" class="mode-btn active" (click)="selectMode('ai')">
+                        🤖 Human vs AI
+                    </button>
+                    <button id="humanVsHumanBtn" class="mode-btn" (click)="selectMode('twoPlayer')">
+                        👥 Human vs Human
+                    </button>
+                </div>
+            </header>
+
+            <div class="game-area">
+                <div class="board-container">
+                    <canvas id="gameBoard" width="760" height="760"></canvas>
+                </div>
+
+                <div class="game-sidebar">
+                    <div class="game-info">
+                        <div class="player-info">
+                            <div class="player player-black">
+                                <span class="player-label">Black</span>
+                                <span id="blackScore" class="player-score">0</span>
+                                <span class="captured-label">Captured:</span>
+                                <span id="blackCaptured" class="captured-count">0</span>
+                            </div>
+                            <div class="player player-white">
+                                <span class="player-label">White</span>
+                                <span id="whiteScore" class="player-score">0</span>
+                                <span class="captured-label">Captured:</span>
+                                <span id="whiteCaptured" class="captured-count">0</span>
+                            </div>
+                        </div>
+
+                        <div class="game-status">
+                            <p id="status">Initializing game...</p>
+                            <p id="currentPlayer">Current: Black</p>
+                        </div>
+
+                        <div class="controls">
+                            <button id="passBtn" class="btn" (click)="passMove()">Pass</button>
+                            <button id="undoBtn" class="btn" (click)="undoMove()" disabled>Undo</button>
+                            <button id="resetBtn" class="btn" (click)="resetGame()">New Game</button>
+                        </div>
+
+                        <div class="history">
+                            <h3>Instructions:</h3>
+                            <ul>
+                                <li>Left click to place a stone</li>
+                                <li>Capture opponent stones or control territory to win</li>
+                                <li>Click "Pass" when you have no moves</li>
+                                <li>Game ends when both players pass</li>
+                                <li>Change board size before starting a new game</li>
+                            </ul>
+                            <p style="margin-top: 10px; margin-bottom: 0px;"><strong>Board Size:</strong></p>
+                            <select id="boardSize" (change)="changeBoardSize()" style="width: 100%; padding: 5px; margin: 5px 0;">
+                                <option value="9">9x9</option>
+                                <option value="13">13x13</option>
+                                <option value="19" selected>19x19</option>
+                            </select>
+                            <p style="margin-top: 10px; margin-bottom: 0px;"><strong>AI Difficulty:</strong></p>
+                            <select id="difficulty" (change)="changeDifficulty()" style="width: 100%; padding: 5px; margin: 5px 0;">
+                                <option value="easy">Easy</option>
+                                <option value="medium" selected>Medium</option>
+                                <option value="hard">Hard</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p style="margin-bottom: 0px;">Left click to place stones | Capture territory or opponent stones to win</p>
+            </footer>
+        </div>
+    </div>
+</div>

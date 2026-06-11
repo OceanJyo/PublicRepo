@@ -2,21 +2,20 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 
-import { Points24Component } from './points-24.component';
+import { MatchPairComponent } from './match-pair';
 
-describe('Points24Component', () => {
-  let component: Points24Component;
-  let fixture: ComponentFixture<Points24Component>;
+describe('MatchPairComponent', () => {
+  let component: MatchPairComponent;
+  let fixture: ComponentFixture<MatchPairComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, Points24Component],
+      imports: [HttpClientTestingModule, MatchPairComponent],
       providers: [HttpClient]
-
     })
     .compileComponents();
     
-    fixture = TestBed.createComponent(Points24Component);
+    fixture = TestBed.createComponent(MatchPairComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

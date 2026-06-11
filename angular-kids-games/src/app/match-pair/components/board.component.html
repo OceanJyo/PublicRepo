@@ -1,9 +1,0 @@
-<!-- <button (click)="onClickStart()">START</button> -->
-
-<div id="match-pair-card-board" #divMatchPairBoard>
-    @for (card of cards; track card.cardId; let i = $index) {
-        <match-pair-card id="No_{{i}}" [card]="card" [cardSize]="cardSize" [selected]="selectedCards[i]"
-            (cardSelected)="onCardSelected($event)" #matchPairCards
-        ></match-pair-card>
-    }
-</div>

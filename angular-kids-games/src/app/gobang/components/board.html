@@ -1,0 +1,67 @@
+<div class="body">
+    <div class="main-content">
+        <div class="game-container">
+            <header>
+                <h1>Gobang (Five in a Row)</h1>
+                <div class="mode-selector">
+                    <button id="humanVsAIBtn" class="mode-btn active" (click)="selectGameMode('humanVsAI')">
+                        🤖 Human vs AI
+                    </button>
+                    <button id="humanVsHumanBtn" class="mode-btn" (click)="selectGameMode('humanVsHuman')">
+                        👥 Human vs Human
+                    </button>
+                </div>
+            </header>
+
+            <div class="game-area">
+                <div class="board-container">
+                    <canvas id="gameBoard" width="760" height="760"></canvas>
+                </div>
+
+                <div class="game-sidebar">
+                    <div class="game-info">
+                        <div class="player-info">
+                            <div class="player" id="blackPlayer">
+                                <div class="player-stone black-stone"></div>
+                                <span class="player-name" id="blackPlayerName">Player 1 (Black)</span>
+                            </div>
+                            <div class="player" id="whitePlayer">
+                                <div class="player-stone white-stone"></div>
+                                <span class="player-name" id="whitePlayerName">Player 2 (White)</span>
+                            </div>
+                        </div>
+
+                        <div class="game-status">
+                            <p id="gameStatus">Black's Turn</p>
+                        </div>
+
+                        <div class="controls">
+                            <button id="resetBtn" class="btn">New Game</button>
+                            <button id="undoBtn" class="btn">Undo</button>
+                        </div>
+
+                        <div class="history">
+                            <h3>Instructions:</h3>
+                            <ul>
+                                <li>Click on the board to place your stone</li>
+                                <li>Get 5 stones in a row (horizontally, vertically, or diagonally) to win</li>
+                                <li>Players alternate turns</li>
+                                <li>Black always goes first</li>
+                            </ul>
+                            <p style="margin-top: 10px; margin-bottom: 0px;"><strong>Board Size:</strong></p>
+                            <select id="boardSize" (change)="changeBoardSize()" style="width: 100%; padding: 5px; margin: 5px 0;">
+                                <option value="9">9x9</option>
+                                <option value="13">13x13</option>
+                                <option value="19" selected>19x19</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <footer>
+                <p style="margin-bottom: 0px;">Click to place stones | Get 5 in a row to win</p>
+            </footer>
+        </div>
+    </div>
+</div>

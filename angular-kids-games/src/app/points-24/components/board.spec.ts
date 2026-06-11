@@ -1,25 +1,25 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
-import { ScratchComponent } from './scratch.component';
+import { Board } from './board';
 import { Points24Service } from '../services/points-24.service';
-import { Points24SimpleExpression } from '../../app/models/kidsgames.model';
+import { Points24SimpleExpression } from '../../models/kidsgames.model';
 
-describe('ScratchComponent', () => {
-  let component: ScratchComponent;
-  let fixture: ComponentFixture<ScratchComponent>;
+describe('Points24.BoardComponent', () => {
+  let component: Board;
+  let fixture: ComponentFixture<Board>;
   let service: Points24Service;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ScratchComponent],
+      imports: [HttpClientTestingModule, Board],
       providers: [Points24Service, HttpClient]
     })
     .compileComponents();
-    
+  
     service = TestBed.inject(Points24Service);
-    fixture = TestBed.createComponent(ScratchComponent);
+    fixture = TestBed.createComponent(Board);
     component = fixture.componentInstance;
     const exps: Points24SimpleExpression[] = [
       {
@@ -50,7 +50,7 @@ describe('ScratchComponent', () => {
         resultDragged: false
       },
     ];
-    component.expressions = exps;
+    component.expressions = exps;    
     fixture.detectChanges();
   });
 

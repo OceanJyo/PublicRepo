@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { BoardComponent } from './board.component';
 import { Points24Service } from '../services/points-24.service';
@@ -13,9 +13,9 @@ describe('Points24.BoardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [BoardComponent],
-    providers: [Points24Service, HttpClient, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-})
+      imports: [HttpClientTestingModule, BoardComponent],
+      providers: [Points24Service, HttpClient]
+    })
     .compileComponents();
   
     service = TestBed.inject(Points24Service);

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { HttpClient, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClient } from '@angular/common/http';
 
 import { MatchPairComponent } from './match-pair.component';
 
@@ -10,9 +10,9 @@ describe('MatchPairComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-    imports: [MatchPairComponent],
-    providers: [HttpClient, provideHttpClient(withInterceptorsFromDi()), provideHttpClientTesting()]
-})
+      imports: [HttpClientTestingModule, MatchPairComponent],
+      providers: [HttpClient]
+    })
     .compileComponents();
     
     fixture = TestBed.createComponent(MatchPairComponent);

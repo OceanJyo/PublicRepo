@@ -2,24 +2,24 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 
-import { ScratchComponent } from './scratch.component';
+import { Scratch } from './scratch';
 import { Points24Service } from '../services/points-24.service';
-import { Points24SimpleExpression } from '../../app/models/kidsgames.model';
+import { Points24SimpleExpression } from '../../models/kidsgames.model';
 
 describe('ScratchComponent', () => {
-  let component: ScratchComponent;
-  let fixture: ComponentFixture<ScratchComponent>;
+  let component: Scratch;
+  let fixture: ComponentFixture<Scratch>;
   let service: Points24Service;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule, ScratchComponent],
+      imports: [HttpClientTestingModule, Scratch],
       providers: [Points24Service, HttpClient]
     })
     .compileComponents();
     
     service = TestBed.inject(Points24Service);
-    fixture = TestBed.createComponent(ScratchComponent);
+    fixture = TestBed.createComponent(Scratch);
     component = fixture.componentInstance;
     const exps: Points24SimpleExpression[] = [
       {

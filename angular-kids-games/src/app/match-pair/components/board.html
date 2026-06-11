@@ -1,0 +1,17 @@
+<!-- <button (click)="onClickStart()">START</button> -->
+
+<div id="match-pair-card-board" #divMatchPairBoard>
+
+    @if (_loading()) {
+        <div class="spinner-border text-primary" role="status">
+            <span class="visually-hidden">Loading...</span>
+        </div>
+    }
+    @else {
+        @for (card of _cards(); track card.cardId; let i = $index) {
+            <match-pair-card id="No_{{i}}" [card]="card" [cardSize]="CARD_SIZE" [selected]="selectedCards[i]"
+                (cardSelected)="onCardSelected($event)" #matchPairCards
+            ></match-pair-card>
+        }
+    }
+</div>
