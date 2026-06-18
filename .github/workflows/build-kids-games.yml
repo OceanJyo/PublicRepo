@@ -19,7 +19,7 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20]
+        node-version: [24]
         # See supported Node.js release schedule at https://nodejs.org/en/about/releases/
 
     steps:
@@ -35,9 +35,11 @@ jobs:
         run: npm ci
         working-directory: ./angular-kids-games
       - name: Run tests
-        run: npm run test:ci
+        # run: npm run test:ci
+        run: npm run test
       - name: Build
-        run: npm run build:cd
+        # run: npm run build:cd
+        run: npm run build
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.6.8
         with:
