@@ -1,7 +1,0 @@
-#match-pair-card-board {
-    display: grid;
-    /* grid-template-columns: auto auto auto auto auto auto; */
-    /* flex-wrap: wrap; */
-    justify-content: center;
-    gap: 20px;
-}
