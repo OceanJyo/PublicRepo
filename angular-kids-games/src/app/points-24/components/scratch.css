@@ -75,7 +75,13 @@
     height: 100%;
     align-content: center;
     color: rgb(25, 24, 24);
-    cursor: default;
+    cursor: grab;
     overflow: hidden;
     text-overflow: ellipsis;
+    touch-action: none;
 }
+
+.points24-drop-target {
+    touch-action: none;
+}
+

@@ -1,6 +1,7 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { NgClass } from '@angular/common';
 import { Points24Card, Points24DeckInfo } from '../../models/kidsgames.model';
+import { Points24DragService } from '../services/points-24-drag';
 
 @Component({
   selector: 'points24-card',
@@ -13,6 +14,8 @@ export class Card {
 
   @Input() card!: Points24Card;
   @Input() selected: boolean = false;
+  
+  private dragService = inject(Points24DragService);
 
   onClickCard() {
       this.selected = !this.selected;
@@ -24,5 +27,11 @@ export class Card {
       de.dataTransfer?.setData("id", img.id);
     }
   }
+
+  onPointerDown(event: PointerEvent) {
+    if (this.selected || !(event.currentTarget instanceof HTMLImageElement)) return;
+
+    this.dragService.start(event, event.currentTarget);
+  }  
     
 }

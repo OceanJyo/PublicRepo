@@ -3,6 +3,7 @@ import { NgClass } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Points24Card, Points24SimpleExpression } from '../../models/kidsgames.model';
 import { Points24Service } from '../services/points-24.service';
+import { Points24DragService } from '../services/points-24-drag';
 
 @Component({
   selector: 'scratch-paper',
@@ -39,6 +40,7 @@ export class Scratch {
   //_disabledOperator: boolean = false;
 
   cardService: Points24Service = inject(Points24Service);
+  private dragService = inject(Points24DragService);
 
   constructor(private render: Renderer2) {}
   
@@ -73,34 +75,54 @@ export class Scratch {
       de.dataTransfer?.setData("id", span.id);
     }
   }
+
+  onPointerDown(event: PointerEvent) {
+    if (this.expressions[this.stepIdx].isFailed || !(event.currentTarget instanceof HTMLSpanElement)) return;
+
+    this.dragService.start(event, event.currentTarget);
+  }
+
   onDragOver(de: DragEvent) {
     de.preventDefault();
   }
+
   onDrop(de: DragEvent) {
     de.preventDefault();
     let id = de.dataTransfer?.getData("id");
+    if (!id || !(de.currentTarget instanceof HTMLDivElement)) return;
+
+    this.addOperand(id, de.currentTarget);
+  }
+
+  onPointerDrop(event: Event) {
+    const id = (event as CustomEvent<{ id: string }>).detail?.id;
+    if (!id || !(event.currentTarget instanceof HTMLDivElement)) return;
+
+    this.addOperand(id, event.currentTarget);
+  }
+
+  private addOperand(id: string, curDiv: HTMLDivElement) {
     // if dragged element has no id, return
     if (!id) return;
-    const curDiv = de.currentTarget as HTMLDivElement;
     // if current div already has child, return
     if (curDiv?.childNodes.length > 0) return;
     const node = document.getElementById(id);
     // if dragged element is not found, return
     if (!node) return;
     // if dragged element neither image nor span, return
-    if (!(node as any instanceof HTMLImageElement) && !(node as any instanceof HTMLSpanElement)) return;
+    if (!(node instanceof HTMLImageElement) && !(node instanceof HTMLSpanElement)) return;
 
     let htmlElement: any;
     const step = +curDiv.id.split('_')[1];
     let opdVal: number = -1;
     let opdIdx = curDiv.id.split('_')[0].includes("1") ? 1 : 2;
     const attr = this.findNgAttribute(curDiv.attributes);
-    let newAttr!: Attr;
+    let newAttr: Attr | null = null;
     if (attr) {
       newAttr = attr.cloneNode(true) as Attr;
     }
 
-    if (node as any instanceof HTMLImageElement) {
+    if (node instanceof HTMLImageElement) {
       const img = node as HTMLImageElement;
       // if dragged image has no title, return
       if (!img.title) return;
@@ -116,7 +138,7 @@ export class Scratch {
       this.selectedCards[this.cards.findIndex(c => c.code === cardCode)] = true;
       htmlElement = newImg as any;
     }
-    if (node as any instanceof HTMLSpanElement) {
+    if (node instanceof HTMLSpanElement) {
       const span = node as HTMLSpanElement;
       // if dragged span has no
       if (!span.innerText.trim()) return;
@@ -162,7 +184,9 @@ export class Scratch {
     return attr;
   }
 
-  private updateNgAttribute(attrs: NamedNodeMap, attr: Attr) {
+  private updateNgAttribute(attrs: NamedNodeMap, attr: Attr | null) {
+    if (!attr) return;
+
     for (let i = 0; i < attrs.length; i++) {
       if (attrs[i].name.startsWith("_ngcontent-")) {
         attrs.removeNamedItem(attrs[i].name);

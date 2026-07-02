@@ -3,7 +3,7 @@
         (dragstart)="onDragStart($event)">
         <div class="card-base flip-card-front">
             <img id="card_{{card.code}}" [src]="card.img" [title]="card.value" 
-                [draggable]="!selected" >
+                [draggable]="!selected" (pointerdown)="onPointerDown($event)">
         </div>
         <div class="card-base flip-card-back flip">
             <img draggable="false" src="images/back.png">

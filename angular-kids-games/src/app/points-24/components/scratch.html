@@ -1,8 +1,8 @@
 <div class="step-container">
     <div class="exp-container">
         <span class="steps">{{stepIdx+1}}.</span>
-        <div id="oprand1_{{stepIdx+1}}" class="oprand" #operand1Container
-            (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>
+        <div id="oprand1_{{stepIdx+1}}" class="oprand points24-drop-target" #operand1Container
+            (dragover)="onDragOver($event)" (drop)="onDrop($event)" (points24drop)="onPointerDrop($event)"></div>
 
         <div id="operator_group" class="btn-group">
             <input type="radio" class="btn-check" name="operator_{{stepIdx+1}}" id="plus_{{stepIdx+1}}" autocomplete="off"
@@ -19,8 +19,8 @@
             <label class="btn btn-outline-success rounded-0" for="divide_{{stepIdx+1}}">&divide;</label>
         </div>
 
-        <div id="oprand2_{{stepIdx+1}}" class="oprand" #operand2Container
-            (dragover)="onDragOver($event)" (drop)="onDrop($event)"></div>
+        <div id="oprand2_{{stepIdx+1}}" class="oprand points24-drop-target" #operand2Container
+            (dragover)="onDragOver($event)" (drop)="onDrop($event)" (points24drop)="onPointerDrop($event)"></div>
 
         <label class="equal-sign btn border-0" draggable="false">&equals;</label>
 
@@ -29,7 +29,8 @@
                 <div class="card-base flip-card-front">
                     <span id="result_{{stepIdx+1}}" class="results badge text-center p-0 fs-3 rounded-0" 
                         [ngClass]="expressions[stepIdx].isFailed ? 'bg-danger-subtle' : 'bg-success-subtle'"
-                        [draggable]="!expressions[stepIdx].isFailed" (dragstart)="onDragStart($event)">
+                        [draggable]="!expressions[stepIdx].isFailed" (dragstart)="onDragStart($event)"
+                        (pointerdown)="onPointerDown($event)">
                         {{expressions[stepIdx].result}}
                     </span>
                 </div>

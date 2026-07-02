@@ -33,3 +33,8 @@
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
 }
+
+.flip-card-front img {
+    cursor: grab;
+    touch-action: none;
+}
